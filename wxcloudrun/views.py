@@ -1,6 +1,6 @@
 from datetime import datetime
 from flask import render_template, request
-from run import app
+from wxcloudrun import app
 from wxcloudrun.dao import delete_counterbyid, query_counterbyid, insert_counter, update_counterbyid
 from wxcloudrun.model import Counters
 from wxcloudrun.response import make_succ_empty_response, make_succ_response, make_err_response
@@ -21,7 +21,7 @@ def count():
     """
 
     # 获取请求体参数
-    params = request.get_json()
+    params = request.get_json(silent=True) or {}
 
     # 检查action参数
     if 'action' not in params:
